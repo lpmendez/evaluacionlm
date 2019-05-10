@@ -48,7 +48,7 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
 			throws IOException, ServletException {
 		String header = req.getHeader("Authorization");
 
-		if (header != null) {
+		if (header != null && header.startsWith("Bearer")) {
 			try {
 				Claims claims = getAuthentication(header);
 				//creando nuevo token

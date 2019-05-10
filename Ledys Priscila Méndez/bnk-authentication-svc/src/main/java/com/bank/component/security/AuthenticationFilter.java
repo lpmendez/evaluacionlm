@@ -106,6 +106,6 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 			.signWith(SignatureAlgorithm.HS512, env.getProperty("config.token.secret-key"))
 			.compact();
 		
-		res.addHeader("Authorization", token);
+		res.addHeader("Authorization", String.format("Bearer %s", token));
 	}
 }
