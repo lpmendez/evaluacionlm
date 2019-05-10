@@ -1,0 +1,12 @@
+<included>
+	<appender name="CUSTOM_CONSOLE_LOGGER" class="com.bank.utils.LogReplace">
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level --- [%25.25thread] %-50.50logger{50} : %msg%n</pattern>
+			<charset>utf8</charset>
+		</encoder>
+	</appender>
+	
+	<appender name="CUSTOM_ASYNC_LOGGER" class="ch.qos.logback.classic.AsyncAppender">
+		<appender-ref ref="CUSTOM_CONSOLE_LOGGER" />
+	</appender>
+</included>

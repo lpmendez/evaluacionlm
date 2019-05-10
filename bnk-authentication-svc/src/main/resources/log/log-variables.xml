@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<included>
+	<springProperty name="logging_size" source="logging.size" />
+	<springProperty name="max_history" source="logging.maxHistory" />
+	
+</included> 
