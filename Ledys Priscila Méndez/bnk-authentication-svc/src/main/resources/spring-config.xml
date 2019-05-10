@@ -4,5 +4,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
 	xmlns:context="http://www.springframework.org/schema/context">
 
-	<alias name="${config.endpoints.user.data}" alias ="BeanDataUser"/>	
+	<alias name="${config.data.user}" alias ="BeanDataUser"/>	
+	<alias name="${config.data.text}" alias ="BeanDataText"/>	
+	<alias name="${config.data.encrypt}" alias ="BeanDataEncrypt"/>	
 </beans>

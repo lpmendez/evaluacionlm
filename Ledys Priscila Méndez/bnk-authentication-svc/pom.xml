@@ -61,6 +61,17 @@
 			<scope>test</scope>
 		</dependency>
 		
+		<!-- DATABSE -->
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+		</dependency>
+		
+		<!-- JPA HIBERNATE -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>

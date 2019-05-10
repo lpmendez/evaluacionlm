@@ -20,7 +20,7 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 
 import com.bank.exceptions.ApplicationException;
 import com.bank.exceptions.GlobalExceptionHandler;
-import com.bank.pojo.Detail;
+import com.bank.pojo.input.Detail;
 import com.bank.utils.ResponseCode;
 import com.bank.utils.ResponseMsg;
 
@@ -84,11 +84,11 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
 		}
         catch(ExpiredJwtException e){
 	        log.error("Token Expired: {}", e.getMessage(), e);
-	        throw new ApplicationException(HttpStatus.BAD_REQUEST, ResponseCode.ERROR, ResponseMsg.ERROR);
+	        throw new ApplicationException(HttpStatus.UNAUTHORIZED, ResponseCode.ERROR, ResponseMsg.ERROR);
         }
         catch (MalformedJwtException | SignatureException | UnsupportedJwtException e){
             log.error("UnsupportedToken: {}", e.getMessage(), e);
-	        throw new ApplicationException(HttpStatus.BAD_REQUEST, ResponseCode.ERROR, ResponseMsg.ERROR);
+	        throw new ApplicationException(HttpStatus.UNAUTHORIZED, ResponseCode.ERROR, ResponseMsg.ERROR);
         } 
 	}
 	

@@ -1,0 +1,30 @@
+server:
+  port: 1999
+  
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5433/bank?currentSchema=users
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: false
+
+config:
+  tries: 5
+  token:
+    expire-time: 1800000
+    secret-key: d8Fjs73kf%6d
+  data:
+    user: UserDatabase
+    text: B64UsrAndB64Pwd
+    encrypt: Sha512
+    
+
+logging:
+  level:
+    org:
+      springframework:
+        web: WARN

@@ -1,0 +1,6 @@
+
+config:
+  data:
+    user: UserStatic
+    text: B64UsrAndB64Pwd
+    encrypt: Sha512
