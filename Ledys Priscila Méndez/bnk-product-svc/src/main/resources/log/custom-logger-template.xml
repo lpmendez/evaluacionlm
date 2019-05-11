@@ -1,0 +1,27 @@
+<included>
+	<appender name="CUSTOM_CONSOLE_LOGGER" class="com.bank.utils.LogReplace">
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level --- [%25.25thread] %-50.50logger{50} : %msg%n</pattern>
+			<charset>utf8</charset>
+		</encoder>
+	</appender>
+	<appender name="CUSTOM_FILE_LOGGER" class="com.bank.utils.FileLogReplace">
+		<file>${LOG_FILE}.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>${LOG_PATH}${LOG_FILE}%d{yyyyMMdd}_.log</fileNamePattern>
+
+			<!-- keep 30 days' worth of history capped at 3GB total size -->
+			<maxHistory>${max_history}</maxHistory>
+			<totalSizeCap>1GB</totalSizeCap>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level --- [%25.25thread] %-20.20logger{20} : %msg%n</pattern>
+		</encoder>
+	</appender>
+	
+	<appender name="CUSTOM_ASYNC_LOGGER" class="ch.qos.logback.classic.AsyncAppender">
+		<appender-ref ref="CUSTOM_FILE_LOGGER" />
+	</appender>
+</included>

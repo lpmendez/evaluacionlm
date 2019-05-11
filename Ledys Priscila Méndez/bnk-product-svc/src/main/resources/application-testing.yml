@@ -1,0 +1,5 @@
+config:
+  data:
+    loan: LoanDataStatic
+    card: CardDataStatic
+    acc: AccDataStatic

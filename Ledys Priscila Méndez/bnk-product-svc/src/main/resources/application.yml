@@ -1,0 +1,33 @@
+server:
+  port: 2000
+    
+    
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5433/bank?currentSchema=users #cambiar puerto.
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: false
+    
+logging:
+  level:
+    org:
+      springframework:
+        web: WARN
+  path: file-log/
+  file: ${logging.path}bank-product-svc
+  maxHistory: 30
+  
+  
+config:
+  format: dd-MMM-yyyy
+  data:
+    loan: LoanDatabase
+    card: CardDatabase
+    acc: AccDatabase
+  endpoints:
+    accounts: getAccounts
