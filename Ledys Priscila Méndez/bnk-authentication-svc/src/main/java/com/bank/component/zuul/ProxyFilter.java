@@ -16,7 +16,7 @@ public class ProxyFilter extends ZuulFilter {
 		Principal auth = ctx.getRequest().getUserPrincipal();
 		if(auth != null){
 			
-			ctx.addZuulRequestHeader("username", auth.getName());
+			ctx.addZuulRequestHeader("user", auth.getName());
 		}
 		
 		return null;

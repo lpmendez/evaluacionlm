@@ -1,7 +1,6 @@
 package com.bank.component.security;
 
 import java.io.IOException;
-import java.util.Date;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -28,7 +27,6 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
-import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.SignatureException;
 import io.jsonwebtoken.UnsupportedJwtException;
 
@@ -51,18 +49,9 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
 		if (header != null && header.startsWith("Bearer")) {
 			try {
 				Claims claims = getAuthentication(header);
-				//creando nuevo token
 				
-				String newToken = Jwts.builder()
-						.setClaims(claims)
-						.setIssuedAt(new Date())
-						.setExpiration(new Date(System.currentTimeMillis() + Integer.parseInt(env.getProperty("config.token-expire-time"))))
-						.signWith(SignatureAlgorithm.HS512, env.getProperty("config.token-secret-key"))
-						.compact();
-					
-				res.addHeader("Authorization", newToken);
 						
-				SecurityContextHolder.getContext().setAuthentication(loadAuthUser(claims));
+				SecurityContextHolder.getContext().setAuthentication(loadAuthUser(claims, req));
 				
 			} catch(ApplicationException e) {
 				GlobalExceptionHandler.createHttpResponse(res, e);
@@ -77,14 +66,14 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
 	private Claims getAuthentication(String token) throws IOException {
 		try {
 			return Jwts.parser()
-					.setSigningKey(env.getProperty("config.token-secret-key"))
+					.setSigningKey(env.getProperty("config.token.secret-key"))
 					.parseClaimsJws(token.replace("Bearer ", ""))
 					.getBody();
 			
 		}
         catch(ExpiredJwtException e){
 	        log.error("Token Expired: {}", e.getMessage(), e);
-	        throw new ApplicationException(HttpStatus.UNAUTHORIZED, ResponseCode.ERROR, ResponseMsg.ERROR);
+	        throw new ApplicationException(HttpStatus.BAD_REQUEST, ResponseCode.EXPIRED, ResponseMsg.EXPIRED);
         }
         catch (MalformedJwtException | SignatureException | UnsupportedJwtException e){
             log.error("UnsupportedToken: {}", e.getMessage(), e);
@@ -92,7 +81,7 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
         } 
 	}
 	
-	private Authentication loadAuthUser(Claims claims) {
+	private Authentication loadAuthUser(Claims claims, HttpServletRequest req) {
 		String username;
 		Detail details = new Detail();
 		
@@ -100,7 +89,12 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
 		
 		
 		details.setIp(claims.get("ip", String.class));
-		
+		// verificar ip
+		if(!req.getRemoteAddr().equals(details.getIp())) {
+            log.error("Invalid ip: {}", req.getRemoteAddr());
+	        throw new ApplicationException(HttpStatus.FORBIDDEN, ResponseCode.INVALIDIP, ResponseMsg.INVALIDIP);
+		}
+			
 		UsernamePasswordAuthenticationToken result = new UsernamePasswordAuthenticationToken(
 				username, null,null);
 

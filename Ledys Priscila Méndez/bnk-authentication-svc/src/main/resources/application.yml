@@ -12,6 +12,23 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     show-sql: false
 
+
+logging:
+  level:
+    org:
+      springframework:
+        web: WARN
+  path: file-log/
+  file: ${logging.path}bank-product-svc
+  maxHistory: 30
+  
+zuul:
+  routes:
+    product:
+      path: /product/**
+      url: http://localhost:2000
+   
+        
 config:
   tries: 5
   token:
@@ -21,10 +38,3 @@ config:
     user: UserDatabase
     text: B64UsrAndB64Pwd
     encrypt: Sha512
-    
-
-logging:
-  level:
-    org:
-      springframework:
-        web: WARN

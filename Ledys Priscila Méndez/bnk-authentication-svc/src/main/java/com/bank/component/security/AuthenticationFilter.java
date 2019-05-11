@@ -66,10 +66,6 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 	        
 
 			GlobalExceptionHandler.createHttpResponse(res, ex);
-//			res.setStatus(Integer.parseInt(ResponseCode.INACTIVE));
-//			
-//			res.addHeader(response, ResponseCode.INACTIVE);
-//			res.addHeader(responseMsg, ResponseMsg.INACTIVE);
 		} //catch otro exception
 		catch (Exception e) {
 			log.error("Attemp Authentication error: {}", e.getMessage(),e);

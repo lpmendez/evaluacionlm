@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-	<!-- Load logback variables -->
-	<include resource="log/log-variables.xml" />
 
 	<!-- Load appenders configuration -->
 	<include resource="log/custom-logger-template.xml" />
@@ -9,6 +7,7 @@
 	<!-- Default logging level -->
 	<root level="INFO">
 		<appender-ref ref="CUSTOM_CONSOLE_LOGGER" />
+		<appender-ref ref="CUSTOM_FILE_LOGGER" />
 	</root>
 	
 	<logger name="com.bank" level="INFO" additivity="false">
