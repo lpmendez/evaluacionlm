@@ -44,12 +44,8 @@ public class BeneficiaryProcess implements IBeneficiaryProcess {
 			}
 
 			//validar formato de email
-			String pattern = "^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])$";
 			
-		    Pattern r = Pattern.compile(pattern);
-	
-		    Matcher m = r.matcher(request.getEmail());
-		    if (!m.find()) {
+		    if (!validateEmail(request.getEmail())) {
 				throw new ApplicationException(HttpStatus.valueOf(Integer.parseInt(ResponseCode.ERROR)),
 						ResponseCode.ERROR, "Invalid email");
 		    }
@@ -91,4 +87,78 @@ public class BeneficiaryProcess implements IBeneficiaryProcess {
             return false;
         return true;
     }
+	public boolean validateEmail(String email) {
+		String pattern = "^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])$";
+		
+	    Pattern r = Pattern.compile(pattern);
+
+	    Matcher m = r.matcher(email);
+
+	    if (!m.find()) {
+	    	return false;
+	    }
+	    return true;
+	}
+	@Override
+	public void update(Beneficiary request) {
+
+		try {
+			
+			//validar si viene toda la info necesaria
+			if(isNullOrEmpty(request.getEmail()) || isNullOrEmpty(request.getId()) || 
+					isNullOrEmpty(request.getUsr()) ) {
+				throw new ApplicationException(HttpStatus.valueOf(Integer.parseInt(ResponseCode.NO_DATA)),
+						ResponseCode.NO_DATA, ResponseMsg.NO_DATA);
+			}
+
+			//validar formato de email
+			
+		    if (!validateEmail(request.getEmail())) {
+				throw new ApplicationException(HttpStatus.valueOf(Integer.parseInt(ResponseCode.ERROR)),
+						ResponseCode.ERROR, "Invalid email");
+		    }
+			
+		    //validar que SI esté asociada ya al usuario.
+		    if(!data.existsByUsrAndId(request.getUsr(), request.getId())) {
+				throw new ApplicationException(HttpStatus.valueOf(Integer.parseInt(ResponseCode.INVALID)),
+						ResponseCode.INVALID, "Beneficiary not found");
+		    }
+		    //sino actualizarla
+			if(!data.update(request))
+				throw new ApplicationException(HttpStatus.valueOf(Integer.parseInt(ResponseCode.ERROR)),
+						ResponseCode.ERROR, "Error updating beneficiary");
+
+		}
+
+		catch(ApplicationException ex) {
+			throw ex;
+		}
+		catch(Exception ex) {
+			log.error("Error in process.save beneficiary. Error: {}. USer: {}", ex.getMessage(), request.getUsr(), ex);
+		}
+	}
+	@Override
+	public void delete(String id, String usr) {
+		try {
+			
+		    //validar que SI esté asociada ya al usuario.
+		    if(!data.existsByUsrAndId(usr, id)) {
+				throw new ApplicationException(HttpStatus.valueOf(Integer.parseInt(ResponseCode.INVALID)),
+						ResponseCode.INVALID, "Beneficiary not found");
+		    }
+		    //sino eliminarla
+			if(!data.delete(id))
+				throw new ApplicationException(HttpStatus.valueOf(Integer.parseInt(ResponseCode.ERROR)),
+						ResponseCode.ERROR, "Error deleting beneficiary");
+
+		}
+
+		catch(ApplicationException ex) {
+			throw ex;
+		}
+		catch(Exception ex) {
+			log.error("Error in process.save beneficiary. Error: {}. USer: {}", ex.getMessage(), usr, ex);
+		}
+		
+	}
 }

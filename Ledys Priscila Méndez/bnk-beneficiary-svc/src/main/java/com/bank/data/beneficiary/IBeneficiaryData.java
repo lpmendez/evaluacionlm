@@ -8,4 +8,5 @@ public interface IBeneficiaryData {
 	public boolean delete(String id);
 	public boolean exists(String id);
 	public boolean existsBy(String usr, String account);
+	public boolean existsByUsrAndId(String usr, String benid);
 }

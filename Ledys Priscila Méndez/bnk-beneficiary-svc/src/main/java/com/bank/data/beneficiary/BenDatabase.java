@@ -69,6 +69,7 @@ public class BenDatabase implements IBeneficiaryData {
 			info.setBenModifiedDate(new Date());
 			info.setBenModifiedBy(b.getUsr());
 			info.setBenEmail(b.getEmail());
+			repo.save(info);
 			return true;
 
 		}
@@ -89,7 +90,7 @@ public class BenDatabase implements IBeneficiaryData {
 			BnkBenBeneficiary info = obj.get();
 			info.setBenModifiedDate(new Date());
 			info.setBenStatus("I");
-			
+			repo.save(info);
 			return true;
 		}
 		catch(Exception ex) {
@@ -106,6 +107,11 @@ public class BenDatabase implements IBeneficiaryData {
 	@Override
 	public boolean existsBy(String usr, String account) {
 		return repo.existsByBenUsrcodAndBenAccountAndBenStatus(usr, account, "A");
+	}
+
+	@Override
+	public boolean existsByUsrAndId(String usr, String benid) {
+		return repo.existsByBenUsrcodAndBenCodeAndBenStatus(usr, Integer.parseInt(benid), "A");
 	}
 
 }

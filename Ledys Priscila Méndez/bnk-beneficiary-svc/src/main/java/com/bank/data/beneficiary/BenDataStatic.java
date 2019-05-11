@@ -39,4 +39,10 @@ public class BenDataStatic implements IBeneficiaryData {
 		return false;
 	}
 
+	@Override
+	public boolean existsByUsrAndId(String usr, String benid) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }
