@@ -2,6 +2,7 @@ package com.bank.data.card;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -22,7 +23,7 @@ public class CardDatabase implements IProductData<CardDetail> {
 	public CardDatabase(CrdUsrRepository repo,
 			Environment env) {
 		this.repo = repo;
-		sdf = new SimpleDateFormat(env.getProperty("config.format"));
+		sdf = new SimpleDateFormat(env.getProperty("config.format"), Locale.ENGLISH);
 	}
 	
 	@Override
@@ -52,5 +53,10 @@ public class CardDatabase implements IProductData<CardDetail> {
 			return obj;
 		}
 	};
+
+	@Override
+	public CardDetail retrieveByUsrAndId(String user, String id) {
+		return parse.apply(repo.findByCxuCodeAndCxuUsrcod(id, user));
+	}
 
 }

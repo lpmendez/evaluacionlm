@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+	xmlns:context="http://www.springframework.org/schema/context">
+
+	<alias name="${config.data.transaction}" alias ="BeanTranData"/>
+	<alias name="${config.data.loan}" alias ="BeanLoanData"/>
+	<alias name="${config.data.card}" alias ="BeanCardData"/>
+	<alias name="${config.data.acc}" alias ="BeanAccData"/>
+</beans>

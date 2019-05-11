@@ -12,6 +12,12 @@ import com.bank.pojo.output.detail.AccountDetail;
 public class AccDataStatic implements IProductData<AccountDetail> {
 
 	@Override
+	public AccountDetail retrieveByUsrAndId(String user, String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
 	public List<AccountDetail> retrieveAllByUser(String user) {
 		if("LPMENDEZ".equals(user)) {
 			List<AccountDetail> list = new ArrayList<>();

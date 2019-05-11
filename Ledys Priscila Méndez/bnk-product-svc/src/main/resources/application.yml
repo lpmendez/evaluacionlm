@@ -31,3 +31,6 @@ config:
     acc: AccDatabase
   endpoints:
     accounts: getAccounts
+    loan: getInfoLoan/{usr}/{id}
+    card: getInfoCard/{usr}/{id}
+    account: getInfoAcc/{usr}/{id}

@@ -2,6 +2,7 @@ package com.bank.data.account;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -22,7 +23,7 @@ public class AccDatabase implements IProductData<AccountDetail> {
 	public AccDatabase(AccUsrRepository repo,
 			Environment env) {
 		this.repo = repo;
-		sdf = new SimpleDateFormat(env.getProperty("config.format"));
+		sdf = new SimpleDateFormat(env.getProperty("config.format"), Locale.ENGLISH);
 	}
 	
 	@Override
@@ -48,5 +49,10 @@ public class AccDatabase implements IProductData<AccountDetail> {
 			return ad;
 		}
 	};
+
+	@Override
+	public AccountDetail retrieveByUsrAndId(String user, String id) {
+		return parse.apply(repo.findByAxuCodeAndAxuUsrcod(id, user));
+	}
 
 }

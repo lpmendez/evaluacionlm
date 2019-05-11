@@ -1,0 +1,52 @@
+server:
+  port: 2001
+    
+    
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5433/bank?currentSchema=transactions #cambiar puerto.
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    
+logging:
+  level:
+    org:
+      springframework:
+        web: WARN
+  path: file-log/
+  file: ${logging.path}bank-transaction-svc
+  maxHistory: 30
+
+
+service:
+  configuration:
+    http:
+      http-request-timeout: 90000
+      socket-timeout: 90000
+      conn-request-timeout: 90000
+      max-threads: 400
+      max-threads-per-route: 200   
+  
+config:
+  exceed-days: 90
+  format: dd-MMM-yyyy
+  date:
+    output: yyyy-MM-dd
+    output-time: "yyyy-MM-dd hh:mm:ss" 
+  data:
+    loan: LoanDataService
+    card: CardDataService
+    acc: AccDataService
+    transaction: TranDatabase
+  endpoints:
+    transactions: getTransactions/{accountID}
+    svc:
+      product-svc:
+        loans: http://localhost:2000/getInfoLoan/{usr}/{id}
+        cards: http://localhost:2000/getInfoCard/{usr}/{id}
+        accs: http://localhost:2000/getInfoAcc/{usr}/{id}

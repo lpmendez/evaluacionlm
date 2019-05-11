@@ -2,6 +2,7 @@ package com.bank.data.loan;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -22,7 +23,7 @@ public class LoanDatabase implements IProductData<LoanDetail> {
 	public LoanDatabase(LoaUsrRepository repo,
 			Environment env) {
 		this.repo = repo;
-		sdf = new SimpleDateFormat(env.getProperty("config.format"));
+		sdf = new SimpleDateFormat(env.getProperty("config.format"), Locale.ENGLISH);
 	}
 	
 	@Override
@@ -51,5 +52,10 @@ public class LoanDatabase implements IProductData<LoanDetail> {
 			return obj;
 		}
 	};
+
+	@Override
+	public LoanDetail retrieveByUsrAndId(String user, String id) {
+		return parse.apply(repo.findByLxuCodeAndLxuUsrcod(id, user));
+	}
 
 }

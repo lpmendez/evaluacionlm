@@ -20,5 +20,4 @@ public class ProductController {
 	public ProductRes getAccounts(@RequestHeader("user") String user) {
 		return process.getAllProducts(user);
 	}
-	
 }

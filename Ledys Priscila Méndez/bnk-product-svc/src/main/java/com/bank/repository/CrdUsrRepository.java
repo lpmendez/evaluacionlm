@@ -8,4 +8,5 @@ import com.bank.entity.BnkCxuCardUser;
 
 public interface CrdUsrRepository extends CrudRepository<BnkCxuCardUser, String> {
 	public List<BnkCxuCardUser> findByCxuUsrcod(String user);
+	public BnkCxuCardUser findByCxuCodeAndCxuUsrcod(String id, String user);
 }

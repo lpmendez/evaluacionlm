@@ -12,6 +12,12 @@ import com.bank.pojo.output.detail.CardDetail;
 public class CardDataStatic implements IProductData<CardDetail> {
 
 	@Override
+	public CardDetail retrieveByUsrAndId(String user, String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
 	public List<CardDetail> retrieveAllByUser(String user) {
 		if("LPMENDEZ".equals(user)) {
 			return new ArrayList<>();

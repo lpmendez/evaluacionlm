@@ -12,7 +12,6 @@ import com.bank.data.IProductData;
 import com.bank.exception.ApplicationException;
 import com.bank.parse.AccountParse;
 import com.bank.parse.CardParse;
-import com.bank.parse.IAllProductParse;
 import com.bank.parse.LoanParse;
 import com.bank.pojo.output.all.Product;
 import com.bank.pojo.output.all.ProductRes;
@@ -28,9 +27,6 @@ public class ProductProcess implements IProductProcess {
 	private IProductData<LoanDetail> loan;
 	private IProductData<CardDetail> card;
 	private IProductData<AccountDetail> acc;
-	private IAllProductParse<List<CardDetail>> cardParse;
-	private IAllProductParse<List<LoanDetail>> loanParse;
-	private IAllProductParse<List<AccountDetail>> accParse;
 	private Logger log;
 	
 	public ProductProcess(@Qualifier("BeanLoanData") IProductData<LoanDetail> loan,
@@ -40,9 +36,6 @@ public class ProductProcess implements IProductProcess {
 		this.card = card;
 		this.acc = acc;
 		this.log = LoggerFactory.getLogger(getClass());
-		cardParse = new CardParse(); 
-		loanParse = new LoanParse(); 
-		accParse = new AccountParse(); 
 	}
 	@Override
 	public ProductRes getAllProducts(String user) {
@@ -58,9 +51,9 @@ public class ProductProcess implements IProductProcess {
 			List<AccountDetail> accs = acc.retrieveAllByUser(user);
 			
 			Product accounts = new Product();
-			accounts.setCreditCard(cardParse.parse(cards));
-			accounts.setLoan(loanParse.parse(loans));
-			accounts.setPersonal(accParse.parse(accs));
+			accounts.setCreditCard(new CardParse().parse(cards));
+			accounts.setLoan(new LoanParse().parse(loans));
+			accounts.setPersonal(new AccountParse().parse(accs));
 			
 			response.setAccounts(accounts);
 			
