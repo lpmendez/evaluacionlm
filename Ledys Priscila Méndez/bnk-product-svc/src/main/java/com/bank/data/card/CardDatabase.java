@@ -1,5 +1,6 @@
 package com.bank.data.card;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
@@ -7,6 +8,8 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
@@ -20,11 +23,13 @@ public class CardDatabase implements IProductData<CardDetail> {
 
 	private CrdUsrRepository repo;
 	private static SimpleDateFormat sdf;
+	private Logger log;
 	
 	public CardDatabase(CrdUsrRepository repo,
 			Environment env) {
 		this.repo = repo;
 		sdf = new SimpleDateFormat(env.getProperty("config.format"), Locale.ENGLISH);
+		this.log = LoggerFactory.getLogger(getClass());
 	}
 	
 	@Override
@@ -69,6 +74,25 @@ public class CardDatabase implements IProductData<CardDetail> {
 		if(response.isPresent())
 			return parse.apply(response.get());
 		return null;
+	}
+
+	@Override
+	public boolean operation(String prdId, double amount) {
+		try {
+			Optional<BnkCxuCardUser> obj = repo.findById(prdId);
+			if(obj.isPresent()) {
+				BnkCxuCardUser save = obj.get();
+				save.setCxuAvailable(save.getCxuAvailable().add(new BigDecimal(amount)));
+				
+				repo.save(save);
+				return true;
+			}
+		}
+
+		catch(Exception ex) {
+			log.error("Error in save operation account. Error: {}.", ex.getMessage(),  ex);
+		}
+		return false;
 	}
 
 }

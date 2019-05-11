@@ -8,14 +8,17 @@ import java.util.Locale;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import com.bank.data.transaction.ITransactionData;
 import com.bank.exception.ApplicationException;
 import com.bank.pojo.input.ProcessReq;
 import com.bank.pojo.output.Transaction;
+import com.bank.pojo.output.TransactionSave;
 import com.bank.process.product.IProductProcess;
 import com.bank.utils.ResponseCode;
 import com.bank.utils.ResponseMsg;
@@ -28,9 +31,12 @@ public class TranProcess implements ITranProcess {
 	private Environment env;
 	private ApplicationContext context;
 	private SimpleDateFormat otime;
+	private ITransactionData data;
 	
-	public TranProcess(Environment env, ApplicationContext context) {
+	public TranProcess(Environment env, ApplicationContext context,
+			@Qualifier("BeanTranData")ITransactionData data) {
 		this.env = env;
+		this.data = data;
 		sdf = new SimpleDateFormat(env.getProperty("config.format"), Locale.ENGLISH);
 		this.log = LoggerFactory.getLogger(getClass());
 		this.context = context;
@@ -85,6 +91,10 @@ public class TranProcess implements ITranProcess {
 
 		throw new ApplicationException(HttpStatus.valueOf(Integer.parseInt(ResponseCode.ERROR)), 
 				ResponseCode.ERROR, ResponseMsg.ERROR);
+	}
+	@Override
+	public TransactionSave save(TransactionSave input) {
+		return data.save(input);
 	}
 
 }

@@ -45,6 +45,7 @@ config:
     transaction: TranDatabase
   endpoints:
     transactions: getTransactions/{accountID}
+    save: transaction
     svc:
       product-svc:
         loans: http://localhost:2000/getInfoLoan/{usr}/{id}

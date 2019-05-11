@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 import com.bank.pojo.output.TransactionDetail;
+import com.bank.pojo.output.TransactionSave;
 
 @Service("TranDataStatic")
 public class TranDataStatic implements ITransactionData {
@@ -29,6 +30,12 @@ public class TranDataStatic implements ITransactionData {
 	public List<TransactionDetail> retrieveBy(String prdId, String usr, String start, String end) {
 		
 		return trans.get(usr);
+	}
+
+	@Override
+	public TransactionSave save(TransactionSave save) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

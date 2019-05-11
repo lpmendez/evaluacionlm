@@ -33,5 +33,11 @@ public class AccDataStatic implements IProductData<AccountDetail> {
 		return null;
 	}
 
+	@Override
+	public boolean operation(String prdId, double amount) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 
 }

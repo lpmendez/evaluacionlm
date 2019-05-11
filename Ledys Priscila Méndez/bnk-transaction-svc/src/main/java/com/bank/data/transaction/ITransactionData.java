@@ -3,6 +3,7 @@ package com.bank.data.transaction;
 import java.util.List;
 
 import com.bank.pojo.output.TransactionDetail;
+import com.bank.pojo.output.TransactionSave;
 
 public interface ITransactionData {
 	/**
@@ -14,4 +15,5 @@ public interface ITransactionData {
 	 * @return
 	 */
 	public List<TransactionDetail> retrieveBy(String prdId, String usr, String start, String end);
+	public TransactionSave save(TransactionSave save);
 }

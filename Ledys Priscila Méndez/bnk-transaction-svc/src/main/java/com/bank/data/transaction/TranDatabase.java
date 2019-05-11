@@ -1,6 +1,8 @@
 package com.bank.data.transaction;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.function.Function;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import com.bank.entity.BnkTraTransaction;
 import com.bank.pojo.output.TransactionDetail;
+import com.bank.pojo.output.TransactionSave;
 import com.bank.repository.TranRepository;
 
 @Service("TranDatabase")
@@ -56,4 +59,27 @@ public class TranDatabase implements ITransactionData {
 			return res;
 		}
 	};
+
+	@Override
+	public TransactionSave save(TransactionSave save) {
+		BnkTraTransaction obj = new BnkTraTransaction();
+		obj.setTraAccid(save.getAccId());
+		obj.setTraAmount(new BigDecimal(save.getAmount()));
+		obj.setTraCreatedBy(save.getUsrCode());
+		obj.setTraCreatedDate(new Date());
+		obj.setTraDescription(save.getDescription());
+		obj.setTraStatus("A");
+		obj.setTraUsrcod(save.getUsrCode());
+		
+		BnkTraTransaction res =  repo.save(obj);
+		TransactionSave response = new TransactionSave();
+		response.setAccId(res.getTraAccid());
+		response.setAmount(res.getTraAmount().doubleValue());
+		response.setDate(otime.format(res.getTraCreatedDate()));
+		response.setDescription(res.getTraDescription());
+		response.setId(String.valueOf(res.getTraCode()));
+		response.setUsrCode(res.getTraUsrcod());
+		
+		return response;
+	}
 }

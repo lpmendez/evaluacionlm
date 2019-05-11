@@ -31,5 +31,11 @@ public class CardDataStatic implements IProductData<CardDetail> {
 		return null;
 	}
 
+	@Override
+	public boolean operation(String prdId, double amount) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 
 }
