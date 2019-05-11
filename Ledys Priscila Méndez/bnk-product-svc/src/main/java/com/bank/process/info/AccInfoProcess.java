@@ -21,4 +21,9 @@ public class AccInfoProcess implements IInfoProcess<AccountDetail> {
 		return data.retrieveByUsrAndId(usr, id);
 	}
 
+	@Override
+	public AccountDetail retrieveById(String id) {
+		return data.retrieveById(id);
+	}
+
 }

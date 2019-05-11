@@ -27,5 +27,11 @@ public class LoanDataStatic implements IProductData<LoanDetail> {
 		return null;
 	}
 
+	@Override
+	public LoanDetail retrieveById(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

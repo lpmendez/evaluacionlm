@@ -19,7 +19,7 @@ public class GlobalExceptionHandler {
 		try {
 			PrintWriter writer = response.getWriter();
 			
-			response.setStatus(exception.getHttpStatus().value());
+			response.setStatus(Integer.parseInt(exception.getCode()));
 			response.setContentType(ContentType.APPLICATION_JSON.getMimeType());
 			
 			writer.write(createBody(exception));

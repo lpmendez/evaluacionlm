@@ -21,4 +21,9 @@ public class LoanController {
 			@PathVariable("id") String id) {
 		return process.retrieveBy(user, id);
 	}
+	@GetMapping("${config.endpoints.loan-id}")
+	public LoanDetail getInfo(
+			@PathVariable("id") String id) {
+		return process.retrieveById(id);
+	}
 }

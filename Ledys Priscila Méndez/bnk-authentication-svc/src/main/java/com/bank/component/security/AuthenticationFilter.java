@@ -49,7 +49,7 @@ public class AuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 			UserReq user = new ObjectMapper().readValue(req.getInputStream(), UserReq.class);
 			
 			UsernamePasswordAuthenticationToken u = new UsernamePasswordAuthenticationToken(
-					user.getUsername(),
+					user.getUsername().toUpperCase(),
 					user.getPassword(),
 					new ArrayList<>());
 					

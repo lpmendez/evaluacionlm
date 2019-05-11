@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 
 import com.bank.entity.BnkTraTransaction;
 
-public interface TranRepository extends CrudRepository<BnkTraTransaction, String> {
+public interface TranRepository extends CrudRepository<BnkTraTransaction, Integer> {
 	@Query("select tra from "
 			+ "	BnkTraTransaction tra "
 			+ "	where tra.traUsrcod = :user "

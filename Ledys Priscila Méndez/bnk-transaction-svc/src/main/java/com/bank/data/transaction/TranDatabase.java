@@ -52,7 +52,7 @@ public class TranDatabase implements ITransactionData {
 			res.setAmount(t.getTraAmount().doubleValue());
 			res.setDate(otime.format(t.getTraCreatedDate()));
 			res.setDescription(t.getTraDescription());
-			res.setId(t.getTraCode());
+			res.setId(String.valueOf(t.getTraCode()));
 			return res;
 		}
 	};

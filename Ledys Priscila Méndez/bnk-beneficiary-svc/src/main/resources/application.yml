@@ -1,0 +1,53 @@
+server:
+  port: 2002
+    
+    
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5433/bank?currentSchema=beneficiary #cambiar puerto.
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: false
+    
+    
+service:
+  configuration:
+    http:
+      http-request-timeout: 90000
+      socket-timeout: 90000
+      conn-request-timeout: 90000
+      max-threads: 400
+      max-threads-per-route: 200  
+      
+logging:
+  level:
+    org:
+      springframework:
+        web: WARN
+  path: file-log/
+  file: ${logging.path}bank-product-svc
+  maxHistory: 30
+  
+  
+config:
+  format: dd-MMM-yyyy
+  data:
+    loan: LoanDataService
+    card: CardDataService
+    acc: AccDataService
+    beneficiary: BenDatabase
+  endpoints:
+    beneficiary: beneficiary
+    beneficiary-id: beneficiary/{beneficiaryID}
+    svc:
+      product-svc:
+        loans: http://localhost:2000/getInfoLoan/{usr}/{id}
+        cards: http://localhost:2000/getInfoCard/{usr}/{id}
+        accs: http://localhost:2000/getInfoAcc/{usr}/{id}
+        loans-id: http://localhost:2000/getInfoLoan/{id}
+        cards-id: http://localhost:2000/getInfoCard/{id}
+        accs-id: http://localhost:2000/getInfoAcc/{id}

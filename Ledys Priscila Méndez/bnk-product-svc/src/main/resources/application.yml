@@ -34,3 +34,6 @@ config:
     loan: getInfoLoan/{usr}/{id}
     card: getInfoCard/{usr}/{id}
     account: getInfoAcc/{usr}/{id}
+    loan-id: getInfoLoan/{id}
+    card-id: getInfoCard/{id}
+    account-id: getInfoAcc/{id}

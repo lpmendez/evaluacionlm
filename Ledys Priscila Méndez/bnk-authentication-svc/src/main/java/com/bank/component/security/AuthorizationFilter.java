@@ -50,7 +50,6 @@ public class AuthorizationFilter extends BasicAuthenticationFilter {
 			try {
 				Claims claims = getAuthentication(header);
 				
-						
 				SecurityContextHolder.getContext().setAuthentication(loadAuthUser(claims, req));
 				
 			} catch(ApplicationException e) {

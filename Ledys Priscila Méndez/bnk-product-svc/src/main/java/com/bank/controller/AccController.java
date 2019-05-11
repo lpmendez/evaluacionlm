@@ -21,4 +21,11 @@ public class AccController {
 			@PathVariable("id") String id) {
 		return process.retrieveBy(user, id);
 	}
+	
+
+	@GetMapping("${config.endpoints.account-id}")
+	public AccountDetail getInfo(
+			@PathVariable("id") String id) {
+		return process.retrieveById(id);
+	}
 }

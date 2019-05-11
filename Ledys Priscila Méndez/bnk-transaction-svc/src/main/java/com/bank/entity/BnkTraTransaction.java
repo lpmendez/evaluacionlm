@@ -3,8 +3,11 @@ package com.bank.entity;
 
 import java.math.BigDecimal;
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -21,7 +24,7 @@ public class BnkTraTransaction implements java.io.Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private String traCode;
+	private int traCode;
 	private String traAccid;
 	private String traUsrcod;
 	private String traDescription;
@@ -35,7 +38,7 @@ public class BnkTraTransaction implements java.io.Serializable {
 	public BnkTraTransaction() {
 	}
 
-	public BnkTraTransaction(String traCode, String traAccid, String traUsrcod, String traCreatedBy,
+	public BnkTraTransaction(int traCode, String traAccid, String traUsrcod, String traCreatedBy,
 			Date traCreatedDate) {
 		this.traCode = traCode;
 		this.traAccid = traAccid;
@@ -44,7 +47,7 @@ public class BnkTraTransaction implements java.io.Serializable {
 		this.traCreatedDate = traCreatedDate;
 	}
 
-	public BnkTraTransaction(String traCode, String traAccid, String traUsrcod, String traDescription,
+	public BnkTraTransaction(int traCode, String traAccid, String traUsrcod, String traDescription,
 			BigDecimal traAmount, String traStatus, String traCreatedBy, Date traCreatedDate, String traModifiedBy,
 			Date traModifiedDate) {
 		this.traCode = traCode;
@@ -60,13 +63,13 @@ public class BnkTraTransaction implements java.io.Serializable {
 	}
 
 	@Id
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "tra_code", unique = true, nullable = false, length = 10)
-	public String getTraCode() {
+	public int getTraCode() {
 		return this.traCode;
 	}
 
-	public void setTraCode(String traCode) {
+	public void setTraCode(int traCode) {
 		this.traCode = traCode;
 	}
 

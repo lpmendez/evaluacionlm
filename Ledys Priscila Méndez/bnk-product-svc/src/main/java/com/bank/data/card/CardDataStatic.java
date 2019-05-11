@@ -25,5 +25,11 @@ public class CardDataStatic implements IProductData<CardDetail> {
 		return null;
 	}
 
+	@Override
+	public CardDetail retrieveById(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

@@ -21,4 +21,9 @@ public class CardInfoProcess implements IInfoProcess<CardDetail> {
 		return data.retrieveByUsrAndId(usr, id);
 	}
 
+	@Override
+	public CardDetail retrieveById(String id) {
+		return data.retrieveById(id);
+	}
+
 }

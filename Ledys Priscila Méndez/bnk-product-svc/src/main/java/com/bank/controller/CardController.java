@@ -21,4 +21,9 @@ public class CardController {
 			@PathVariable("id") String id) {
 		return process.retrieveBy(user, id);
 	}
+	@GetMapping("${config.endpoints.card-id}")
+	public CardDetail getInfo(
+			@PathVariable("id") String id) {
+		return process.retrieveById(id);
+	}
 }

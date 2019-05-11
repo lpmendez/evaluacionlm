@@ -3,6 +3,7 @@ package com.bank.data.account;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -52,7 +53,18 @@ public class AccDatabase implements IProductData<AccountDetail> {
 
 	@Override
 	public AccountDetail retrieveByUsrAndId(String user, String id) {
-		return parse.apply(repo.findByAxuCodeAndAxuUsrcod(id, user));
+		BnkAxuAccountUser response =  repo.findByAxuCodeAndAxuUsrcod(id, user);
+		if(response != null)
+			return parse.apply(response);
+		return null;
+	}
+
+	@Override
+	public AccountDetail retrieveById(String id) {
+		Optional<BnkAxuAccountUser> response =  repo.findById(id);
+		if(response.isPresent())
+			return parse.apply(response.get());
+		return null;
 	}
 
 }

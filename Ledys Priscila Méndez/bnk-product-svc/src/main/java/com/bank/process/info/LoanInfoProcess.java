@@ -21,4 +21,9 @@ public class LoanInfoProcess implements IInfoProcess<LoanDetail> {
 		return data.retrieveByUsrAndId(usr, id);
 	}
 
+	@Override
+	public LoanDetail retrieveById(String id) {
+		return data.retrieveById(id);
+	}
+
 }

@@ -58,10 +58,10 @@ public class TranProcess implements ITranProcess {
 			// validar que la cuenta exista y pertenezca al cliente..: 404
 			//creo que lo validaré en cada process..
 			IProductProcess prodProcess =  (IProductProcess) context.getBean(input.getType());
-			//ordenar las transacciones
 			Transaction tra= prodProcess.execute(input);
 			
 			if(tra != null && tra.getTransactions() != null) {
+				//ordenar las transacciones
 				tra.getTransactions().sort((t1,t2) -> {
 					try {
 						return otime.parse(t2.getDate()).compareTo(otime.parse(t1.getDate()));

@@ -3,6 +3,7 @@ package com.bank.data.card;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -56,7 +57,18 @@ public class CardDatabase implements IProductData<CardDetail> {
 
 	@Override
 	public CardDetail retrieveByUsrAndId(String user, String id) {
-		return parse.apply(repo.findByCxuCodeAndCxuUsrcod(id, user));
+		BnkCxuCardUser response =  repo.findByCxuCodeAndCxuUsrcod(id, user);
+		if(response != null)
+			return parse.apply(response);
+		return null;
+	}
+
+	@Override
+	public CardDetail retrieveById(String id) {
+		Optional<BnkCxuCardUser> response =  repo.findById(id);
+		if(response.isPresent())
+			return parse.apply(response.get());
+		return null;
 	}
 
 }

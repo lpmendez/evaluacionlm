@@ -27,5 +27,11 @@ public class AccDataStatic implements IProductData<AccountDetail> {
 		return null;
 	}
 
+	@Override
+	public AccountDetail retrieveById(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }

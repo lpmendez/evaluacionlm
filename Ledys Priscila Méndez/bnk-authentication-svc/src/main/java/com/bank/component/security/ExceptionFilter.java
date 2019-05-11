@@ -33,9 +33,9 @@ public class ExceptionFilter extends ExceptionTranslationFilter {
 			GlobalExceptionHandler.createHttpResponse(
 				(HttpServletResponse) res,
 				new ApplicationException(
-					HttpStatus.FORBIDDEN,
-					ResponseCode.INVALID,
-					ResponseMsg.INVALID
+					HttpStatus.valueOf(Integer.parseInt(ResponseCode.ERROR)),
+					ResponseCode.ERROR,
+					ResponseMsg.ERROR
 				)
 			);
 			
