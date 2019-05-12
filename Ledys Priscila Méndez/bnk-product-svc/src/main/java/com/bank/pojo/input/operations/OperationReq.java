@@ -11,4 +11,6 @@ public class OperationReq {
 	private double amount;
 	private String user;
 	private String description;
+	
+	private String beneficiaryID;
 }

@@ -11,9 +11,6 @@ public class AccDataStatic implements IProductData<AccountDetail> {
 	@Override
 	public AccountDetail retrieveByUsrAndId(String usr, String id) {
 		
-		if("LPMENDEZ".equals(usr) && ("1".equals(id) || "4".equals(id))) {
-			return new AccountDetail();
-		}
 		return null;
 	}
 

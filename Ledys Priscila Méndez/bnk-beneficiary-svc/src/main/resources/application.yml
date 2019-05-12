@@ -43,6 +43,7 @@ config:
   endpoints:
     beneficiary: beneficiary
     beneficiary-id: beneficiary/{beneficiaryID}
+    exists: exists/{beneficiaryID}/{user}
     svc:
       product-svc:
         loans: http://localhost:2000/getInfoLoan/{usr}/{id}

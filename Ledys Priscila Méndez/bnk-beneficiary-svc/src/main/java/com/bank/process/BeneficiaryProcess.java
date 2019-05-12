@@ -54,12 +54,17 @@ public class BeneficiaryProcess implements IBeneficiaryProcess {
 			// mandar a llamar al servicio correspondiente del servicio de producto, creo que lo haré igual que en transaction
 	
 			IProductProcess prodProcess =  (IProductProcess) context.getBean(request.getType());
-			boolean isValid= prodProcess.existsProd(request.getAccount());
+			boolean ownProd= prodProcess.existsProd(request.getUsr(), request.getAccount());
+			boolean exists= prodProcess.existsProd(request.getAccount());
 	
-			if(!isValid) {
-				// si no es valido, responder con 404.
+			if(!exists) {
+				// si no existe, responder con 404.
 				throw new ApplicationException(HttpStatus.valueOf(Integer.parseInt(ResponseCode.INVALID)),
 						ResponseCode.INVALID, ResponseMsg.INVALID);
+			}
+			if(ownProd) {
+				throw new ApplicationException(HttpStatus.valueOf(Integer.parseInt(ResponseCode.ERROR)),
+						ResponseCode.ERROR, "The owner of the product is the same user");
 			}
 		    
 		    //validar que no esté asociada ya al usuario.
@@ -160,5 +165,9 @@ public class BeneficiaryProcess implements IBeneficiaryProcess {
 			log.error("Error in process.save beneficiary. Error: {}. USer: {}", ex.getMessage(), usr, ex);
 		}
 		
+	}
+	@Override
+	public Beneficiary retrieveByIdAndUsr(String id, String usr) {
+		return data.findByIdAndUsr(id, usr);
 	}
 }

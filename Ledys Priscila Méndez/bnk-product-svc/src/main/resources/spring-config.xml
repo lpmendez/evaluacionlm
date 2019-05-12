@@ -8,4 +8,5 @@
 	<alias name="${config.data.card}" alias ="BeanCardData"/>
 	<alias name="${config.data.acc}" alias ="BeanAccData"/>	
 	<alias name="${config.data.tra}" alias ="BeanTraData"/>	
+	<alias name="${config.data.ben}" alias ="BeanBenData"/>	
 </beans>

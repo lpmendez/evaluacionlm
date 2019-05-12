@@ -79,7 +79,7 @@ public class BeneficiaryTest extends Mockito{
 	public void invalidEmail() {
 
 		exceptionRule.expect(ApplicationException.class);
-		exceptionRule.expectMessage(ResponseMsg.ERROR);
+		exceptionRule.expectMessage("Invalid email");
 		
 		Beneficiary info = new Beneficiary();
 		info.setAccount("1");

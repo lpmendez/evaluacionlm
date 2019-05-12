@@ -3,6 +3,7 @@ package com.bank.controller;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -49,5 +50,12 @@ public class BeneficiaryController {
 			@PathVariable("beneficiaryID") String beneficiaryID) {
 		process.delete(beneficiaryID, user);
 		response.setStatus(Integer.parseInt(ResponseCode.UPDATED));
+	}
+	
+	@GetMapping("${config.endpoints.exists}")
+	public Beneficiary exist(
+			@PathVariable("user") String user,
+			@PathVariable("beneficiaryID") String beneficiaryID) {
+		return process.retrieveByIdAndUsr(beneficiaryID, user);
 	}
 }

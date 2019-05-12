@@ -10,7 +10,7 @@ public class BenDataStatic implements IBeneficiaryData {
 	@Override
 	public boolean save(Beneficiary b) {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
@@ -43,6 +43,12 @@ public class BenDataStatic implements IBeneficiaryData {
 	public boolean existsByUsrAndId(String usr, String benid) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public Beneficiary findByIdAndUsr(String benid, String usr) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

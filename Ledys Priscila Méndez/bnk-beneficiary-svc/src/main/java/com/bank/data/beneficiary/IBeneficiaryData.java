@@ -9,4 +9,5 @@ public interface IBeneficiaryData {
 	public boolean exists(String id);
 	public boolean existsBy(String usr, String account);
 	public boolean existsByUsrAndId(String usr, String benid);
+	public Beneficiary findByIdAndUsr(String benid, String usr);
 }

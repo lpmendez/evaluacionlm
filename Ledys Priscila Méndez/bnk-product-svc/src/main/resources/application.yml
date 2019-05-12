@@ -38,6 +38,7 @@ config:
     card: CardDatabase
     acc: AccDatabase
     tra: TransactionService
+    ben: BeneficiaryService
   endpoints:
     accounts: getAccounts
     transfer:
@@ -57,3 +58,5 @@ config:
     svc:
       transaction-svc:
         save: http://localhost:2001/transaction
+      beneficiary-svc:
+        exists: http://localhost:2002/exists/{beneficiaryID}/{user}

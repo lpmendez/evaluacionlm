@@ -114,4 +114,24 @@ public class BenDatabase implements IBeneficiaryData {
 		return repo.existsByBenUsrcodAndBenCodeAndBenStatus(usr, Integer.parseInt(benid), "A");
 	}
 
+	@Override
+	public Beneficiary findByIdAndUsr(String benid, String usr) {
+		try {
+			BnkBenBeneficiary obj = repo.findByBenCodeAndBenUsrcodAndBenStatus(Integer.parseInt(benid), usr, "A");
+			Beneficiary response = new Beneficiary();
+			response.setAccount(obj.getBenAccount());
+			response.setEmail(obj.getBenEmail());
+			response.setId(benid);
+			response.setName(obj.getBenName());
+			response.setType(obj.getBenType());
+			response.setUsr(obj.getBenUsrcod());
+			
+			return response;
+		}
+		catch(Exception ex) {
+			log.error("Error in find beneciary id and user. Error : {}", ex.getMessage(), ex);
+		}
+		return null;
+	}
+
 }

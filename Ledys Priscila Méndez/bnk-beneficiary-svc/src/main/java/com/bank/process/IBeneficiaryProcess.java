@@ -7,4 +7,5 @@ public interface IBeneficiaryProcess {
 	public void update(Beneficiary request);
 
 	public void delete(String id, String usr);
+	public Beneficiary retrieveByIdAndUsr(String id, String usr);
 }

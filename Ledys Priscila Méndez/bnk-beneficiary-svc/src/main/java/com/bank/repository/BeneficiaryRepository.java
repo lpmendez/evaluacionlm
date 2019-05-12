@@ -8,4 +8,5 @@ public interface BeneficiaryRepository extends CrudRepository<BnkBenBeneficiary,
 	public BnkBenBeneficiary findByBenUsrcodAndBenAccountAndBenStatus(String usr, String accid, String status);
 	public boolean existsByBenUsrcodAndBenAccountAndBenStatus(String usr, String accid, String status);
 	public boolean existsByBenUsrcodAndBenCodeAndBenStatus(String usr, Integer benid, String status);
+	public BnkBenBeneficiary findByBenCodeAndBenUsrcodAndBenStatus(Integer benid, String usr, String status);
 }
