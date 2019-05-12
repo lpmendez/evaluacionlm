@@ -42,7 +42,12 @@ config:
     accounts: getAccounts
     transfer:
       own: ownTransfer
-      thirds: thirdTransfer
+      third: thirdTransfer
+    payment:
+      own-card: ownPayCard
+      third-card: thirdPayCard
+      own-loan: ownPayLoan
+      third-loan: thirdPayLoan
     loan: getInfoLoan/{usr}/{id}
     card: getInfoCard/{usr}/{id}
     account: getInfoAcc/{usr}/{id}
