@@ -1,4 +1,6 @@
 ﻿# LifeBank Project
+
+## Back end
 Los proyectos utilizan lombok, por lo que se recomienda instalar la herramienta de [este link](https://projectlombok.org/download).
  
 Los servicios utilizan base de datos postgresql.<br>
@@ -173,3 +175,14 @@ localhost:1999/beneficiaries/beneficiary/{beneficiaryID}
 
 *Parámetos Path*
 * **beneficiaryID**: Id del beneficiario. Prueba: 4
+
+
+## Front end
+Para iniciar el proyecto `bnk-views` basta con correr el siguiente comando en el path del proyecto
+```shell
+npm install
+```
+Luego
+```shell
+npm start
+```
