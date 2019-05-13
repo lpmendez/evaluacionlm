@@ -3,10 +3,10 @@
 ## Back end
 Los proyectos utilizan lombok, por lo que se recomienda instalar la herramienta de [este link](https://projectlombok.org/download).
  
-Los servicios utilizan base de datos postgresql.<br>
-Correr el script `1-database.sql` que está en la raíz de la carpeta con mi nombre.<br>
-Asegurarse que está conectado en la base de datos *bank* antes de correr el script `2-schemas.sql.`<br>
-Cambiar en los yml de los proyectos el puerto al correspondiente de su servicio, al igual que el usuario y contraseña generica. El puerto generalmente es *5432* y el usuario  *postgres* con la contraseña *root*, yo lo cambié ya que tuve problemas con la instancia principal.
+Los servicios están hechos en Java Spring Boot y utilizan base de datos postgresql. Para preparar la base es necesario:<br>
+1. Correr el script `1-database.sql` que está en la raíz de la carpeta con mi nombre.<br>
+2. Asegurarse que está conectado en la base de datos *bank* antes de correr el script `2-schemas.sql.`<br>
+3. Cambiar en los yml de los proyectos el puerto al correspondiente de su servicio, al igual que el usuario y contraseña generica. El puerto generalmente es *5432* y el usuario  *postgres* con la contraseña *root*, yo lo cambié ya que tuve problemas con la instancia principal.
 
 ### Servicios
 * **bnk-authentication-svc**: Servicio para autenticar y autorizar una petición. Sirve como gateway para los demás servicios. Toda petición de la web vendrá a este servicio.
@@ -178,7 +178,8 @@ localhost:1999/beneficiaries/beneficiary/{beneficiaryID}
 
 
 ## Front end
-Para iniciar el proyecto `bnk-views` basta con correr el siguiente comando en el path del proyecto
+El proyecto web está hecho con [VueJS](https://vuejs.org/). <br>
+Para iniciar el proyecto `bnk-views` es necesario tener instalado [NodeJS](https://nodejs.org/en/download/). Una vez instalado, basta con correr el siguiente comando en el path del proyecto
 ```shell
 npm install
 ```
@@ -186,3 +187,4 @@ Luego
 ```shell
 npm start
 ```
+Inicia en puerto 3003.
