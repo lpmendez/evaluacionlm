@@ -23,6 +23,7 @@ public class TranDatabase implements ITransactionData {
 	private Logger log;
 	private TranRepository repo;
 	private SimpleDateFormat svc;
+	private SimpleDateFormat svcTime;
 	static SimpleDateFormat otime;
 	
 	public TranDatabase(TranRepository repo,
@@ -30,12 +31,14 @@ public class TranDatabase implements ITransactionData {
 		this.repo = repo;
 		this.log = LoggerFactory.getLogger(getClass());
 		svc = new SimpleDateFormat(env.getProperty("config.format"), Locale.ENGLISH);
+		svcTime = new SimpleDateFormat(env.getProperty("config.format-time"), Locale.ENGLISH);
 		otime = new SimpleDateFormat(env.getProperty("config.date.output-time"), Locale.ENGLISH);
 	}
 	@Override
 	public List<TransactionDetail> retrieveBy(String prdId, String usr, String start, String end) {
 		try {
-			List<BnkTraTransaction> trans = repo.findBy(usr, prdId, svc.parse(start), svc.parse(end));
+			end = end+" 23:59:59";
+			List<BnkTraTransaction> trans = repo.findBy(usr, prdId, svc.parse(start), svcTime.parse(end));
 			
 			return
 					trans.stream().map(parse).collect(Collectors.toList());

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import com.bank.data.product.IProductData;
 import com.bank.pojo.product.CardDetail;
 
-@Service("CARD")
+@Service("creditCard")
 public class CardProcess implements IProductProcess {
 
 	private IProductData<CardDetail> data;

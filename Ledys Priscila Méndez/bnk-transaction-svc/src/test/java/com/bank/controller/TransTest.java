@@ -34,7 +34,7 @@ public class TransTest {
 	public void accountNotExist() {
 		exceptionRule.expect(ApplicationException.class);
 		exceptionRule.expectMessage(ResponseMsg.INVALID);
-		controller.getTransByAccAndProd(user, "0003", "01-Jan-2019", "28-Feb-2019", "LOAN");
+		controller.getTransByAccAndProd(user, "0003", "01-Jan-2019", "28-Feb-2019", "loan");
 	}
 
 
@@ -44,7 +44,7 @@ public class TransTest {
 		//para el caso tomaré 3 meses como 90 dias ok
 		exceptionRule.expect(ApplicationException.class);
 		exceptionRule.expectMessage(ResponseMsg.ERROR);
-		controller.getTransByAccAndProd(user, "000001", "03-Dec-2018", "10-Mar-2019", "LOAN");
+		controller.getTransByAccAndProd(user, "000001", "03-Dec-2018", "10-Mar-2019", "loan");
 	}
 
 	@Test
@@ -53,6 +53,6 @@ public class TransTest {
 		//para el caso tomaré 3 meses como 90 dias ok
 		exceptionRule.expect(ApplicationException.class);
 		exceptionRule.expectMessage(ResponseMsg.ERROR);
-		controller.getTransByAccAndProd(user, "000001", "10-Mar-2019", "03-Dec-2018", "LOAN");
+		controller.getTransByAccAndProd(user, "000001", "10-Mar-2019", "03-Dec-2018", "loan");
 	}
 }

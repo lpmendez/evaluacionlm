@@ -22,7 +22,7 @@ import com.bank.pojo.product.LoanDetail;
 import com.bank.utils.ResponseCode;
 import com.bank.utils.ResponseMsg;
 
-@Service("LOAN")
+@Service("loan")
 public class LoanProcess implements IProductProcess {
 
 	private Logger log;

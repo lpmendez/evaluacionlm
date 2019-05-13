@@ -35,6 +35,7 @@ service:
 config:
   exceed-days: 90
   format: dd-MMM-yyyy
+  format-time: dd-MMM-yyyy hh:mm:ss
   date:
     output: yyyy-MM-dd
     output-time: "yyyy-MM-dd hh:mm:ss" 

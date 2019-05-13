@@ -12,12 +12,15 @@ export const store = new Vuex.Store({
         urls:{
             login: 'login',
             validate: 'validate',
+            accounts: 'products/getAccounts',
+            transactions: 'transactions/getTransactions/{account}'
         }
     },
     mutations:{
         setToken: (state, token)=>{
             document.cookie = "token="+token;
             state.token= token;
+            console.log(state.token);
         }
     }
 });

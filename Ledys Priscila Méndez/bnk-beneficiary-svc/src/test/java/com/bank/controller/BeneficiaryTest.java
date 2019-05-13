@@ -43,7 +43,7 @@ public class BeneficiaryTest extends Mockito{
 		info.setAccount("1");
 		info.setEmail("prueba@gmail.com");
 		info.setName("Ledys");
-		info.setType("ACC");
+		info.setType("personal");
 		controller.save(mockResponse, user, info);
 	}
 	
@@ -57,7 +57,7 @@ public class BeneficiaryTest extends Mockito{
 		info.setAccount("2");
 		info.setEmail("prueba@gmail.com");
 		info.setName("Ledys");
-		info.setType("ACC");
+		info.setType("personal");
 		controller.save(mockResponse, user, info);
 	}
 
@@ -71,7 +71,7 @@ public class BeneficiaryTest extends Mockito{
 		Beneficiary info = new Beneficiary();
 		info.setAccount("1");
 		info.setName("Ledys");
-		info.setType("ACC");
+		info.setType("personal");
 		controller.save(mockResponse, user, info);
 	}
 
@@ -85,7 +85,7 @@ public class BeneficiaryTest extends Mockito{
 		info.setAccount("1");
 		info.setEmail("prueba");
 		info.setName("Ledys");
-		info.setType("ACC");
+		info.setType("personal");
 		controller.save(mockResponse, user, info);
 	}
 
@@ -99,7 +99,7 @@ public class BeneficiaryTest extends Mockito{
 		info.setAccount("4");
 		info.setEmail("prueba@gmail.com");
 		info.setName("Ledys");
-		info.setType("ACC");
+		info.setType("personal");
 		controller.save(mockResponse,user, info);
 	}
 }

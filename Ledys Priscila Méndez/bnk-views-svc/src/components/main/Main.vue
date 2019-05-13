@@ -1,6 +1,6 @@
 <template>
     <div class="menu">
-        <div>Consulta de estado de productos bancarios</div>
+        <div><router-link to="/transactions">Consulta de estado de productos bancarios</router-link></div>
         <div>Transferencia entre cuentas bancarias propias</div>
         <div>Transferencia a terceros</div>
         <div>Pago tarjeta de crédito propia</div>

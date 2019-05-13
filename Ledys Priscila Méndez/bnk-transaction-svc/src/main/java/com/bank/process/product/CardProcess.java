@@ -22,7 +22,7 @@ import com.bank.pojo.product.CardDetail;
 import com.bank.utils.ResponseCode;
 import com.bank.utils.ResponseMsg;
 
-@Service("CARD")
+@Service("creditCard")
 public class CardProcess implements IProductProcess {
 
 	private Logger log;

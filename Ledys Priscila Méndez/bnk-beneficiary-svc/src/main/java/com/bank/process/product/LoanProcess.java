@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import com.bank.data.product.IProductData;
 import com.bank.pojo.product.LoanDetail;
 
-@Service("LOAN")
+@Service("loan")
 public class LoanProcess implements IProductProcess {
 
 	private IProductData<LoanDetail> data;

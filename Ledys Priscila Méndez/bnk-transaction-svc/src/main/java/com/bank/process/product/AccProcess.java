@@ -22,7 +22,7 @@ import com.bank.pojo.product.AccountDetail;
 import com.bank.utils.ResponseCode;
 import com.bank.utils.ResponseMsg;
 
-@Service("ACC")
+@Service("personal")
 public class AccProcess implements IProductProcess {
 
 	private Logger log;

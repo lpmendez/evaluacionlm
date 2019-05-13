@@ -22,7 +22,11 @@ router.beforeEach((to, from, next) =>{
   // console.log(to);
   if(reqAuth){
     // console.log("entre");
-    http.get(store.state.urls.validate)
+    http.get(store.state.urls.validate,{
+      headers: {
+        Authorization: store.state.token
+      }
+    })
     .then(response=>{
       next();
     })

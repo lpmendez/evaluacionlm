@@ -1,4 +1,4 @@
-# LifeBank Project
+﻿# LifeBank Project
 Los proyectos utilizan lombok, por lo que se recomienda instalar la herramienta de [este link](https://projectlombok.org/download).
  
 Los servicios utilizan base de datos postgresql.<br>
@@ -30,7 +30,7 @@ Este token que lo provee el inicio de sesión (arriba mencionado).
 Para las pruebas iniciar sesión con usuario `LPMENDEZ` y contraseña `12345`
 
 **GET**<br>
-localhost:1999/product/getAccounts
+localhost:1999/products/getAccounts
 
 ----------------------------------
 
@@ -43,7 +43,7 @@ localhost:1999/transactions/getTransactions/{accountID}?start=01-Jan-2019&end=30
 *Parámetros Querystring*
 * **start**: Fecha de inicio en formato *dd-MMM-yyyy (Inglés)*
 * **end**: Fecha fin en formato *dd-MMM-yyyy (Inglés)*
-* **prd**: Tipo de producto. *ACC, LOAN, CARD.*
+* **prd**: Tipo de producto. *loan, creditCard, personal.*
 
 ----------------------------------
 
